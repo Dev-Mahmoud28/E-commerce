@@ -1,0 +1,60 @@
+<section class="first">
+    <div class="grid md:grid-cols-[minmax(0,1fr)_30%]">
+        <div class="left">
+            <owl-carousel-o [options]="customMainOptions">
+                <ng-template carouselSlide><img src="/images/img1.avif" class="w-full h-[300px] object-cover " alt=""></ng-template>
+                <ng-template carouselSlide><img src="/images/img2.avif" class="w-full h-[300px] object-cover" alt=""></ng-template>
+                <ng-template carouselSlide><img src="/images/slider-image-2.jpeg" class="w-full h-[300px] object-cover" alt=""></ng-template>
+                <ng-template carouselSlide><img src="/images/img4.avif" class="w-full h-[300px] object-cover" alt=""></ng-template>
+                <ng-template carouselSlide><img src="/images/img5.avif" class="w-full h-[300px] object-cover" alt=""></ng-template>
+                <ng-template carouselSlide><img src="/images/img6.avif" class="w-full h-[300px] object-cover" alt=""></ng-template>
+              </owl-carousel-o>
+        </div>
+        <div class="right">
+            <img src="/images/grocery-banner.png" class="w-full h-[150px] object-cover" alt="">
+            <img src="/images/grocery-banner-2.jpeg" class="w-full h-[150px] object-cover" alt="">
+        </div>
+    </div>
+</section>
+
+<section class="second">
+    <h2 class="text-xl my-3">Shop Popular Categories</h2>
+    <owl-carousel-o [options]="customOptions">
+          @for (cat of categories; track cat._id) {
+            <ng-template carouselSlide >
+                <div>
+                    <img [src]="cat.image" class="w-full h-[250px] object-contain" alt="">
+                    <h3 class="text-green-500"> {{cat.name}} </h3>
+                </div>
+              </ng-template>
+          }
+      </owl-carousel-o>
+</section>
+
+<section class="third">
+    <h2 class="my-4">Popular Products</h2>
+    <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        @for (prod of products.slice(0, 12); track prod.id) {
+            <div class="card rounded-md shadow-sm overflow-hidden">
+                <div [routerLink]='["/details", prod._id]' class="cursor-pointer">
+                    <div class="card-img">
+                        <img [src]="prod.imageCover" alt="" class="w-full h-64 object-contain">
+                    </div>
+                    <div class="card-body px-2 py-2 capitalize">
+                        <h4 class="text-green-500 text-xs"> {{prod.category.name}} </h4>
+                        <h3 class="font-medium"> {{prod.title.split(" ", 2).join(" ")}} </h3>
+                        <div class="flex justify-between">
+                            <span> {{prod.price}} EGP</span>
+                            <div class="rating flex items-center">
+                                <i class="fas fa-star text-yellow-300"></i>
+                                <span class="text-gray-500"> {{prod.ratingsAverage}} </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <span (click)="addToWish(prod.id)" class="text-2xl ms-3 cursor-pointer hover:text-red-500 transition-colors duration-300"><i class="fa-solid fa-heart"></i></span>
+                <button (click)="addToCart(prod.id)" class="bg-green-600 text-white py-2 px-4 rounded block w-[80%] mx-auto">Add To Cart</button>
+            </div>
+        }
+    </div>
+</section>

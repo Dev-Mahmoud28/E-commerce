@@ -1,0 +1,12 @@
+<div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+    @for (cat of categories; track cat._id) {
+        <div class="card rounded-md shadow-sm overflow-hidden cursor-pointer">
+            <div class="card-img">
+                <img [src]="cat.image" alt="" class="w-full h-64 object-contain">
+            </div>
+            <div class="card-title mt-3">
+                <h2 class="text-center text-green-500"> {{cat.name}} </h2>
+            </div>
+        </div>
+    }
+</div>

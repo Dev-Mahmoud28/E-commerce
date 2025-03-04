@@ -1,0 +1,25 @@
+<section class="bg-gray-50 p-4">
+    <h1 class="text-3xl">Shop Cart:</h1>
+    <span class="text-green-500">Total Cart Price: {{cartData.totalCartPrice | currency:'GBP'}}</span>
+    @for (prod of cartData.products; track prod.product.id) {
+        <div class="grid md:grid-cols-[10%_minmax(0,1fr)] gap-5 mt-3 border-b">
+            <div class="left">
+                <img [src]="prod.product.imageCover" [alt]="prod.product.title">
+            </div>
+            <div class="right flex justify-between items-center">
+                <div class="start">
+                    <h3> {{prod.product.title}} </h3>
+                    <h4 class="text-green-500">Price: {{prod.price | currency:'GBP'}} </h4>
+                    <button (click)="removeCartItem(prod.product.id)"><i class="fas fa-trash-can text-green-500"></i> Remove</button>
+                </div>
+                <div class="end flex items-center gap-2">
+                    <span (click)="updateQuantity(prod.product.id, prod.count + 1)" class="me-2 cursor-pointer"><i class="fa-solid fa-plus text-green-500"></i></span>
+                    <span>{{prod.count}}</span>
+                    <span (click)="updateQuantity(prod.product.id, prod.count - 1)" class="ms-2 cursor-pointer"><i class="fa-solid fa-minus text-green-500"></i></span>
+                </div>
+            </div>
+        </div>
+    }
+    <button [routerLink]="['/checkout', cartData._id]" class="main-btn mt-4">Checkout</button>
+    <button (click)="clearCart()" class="bg-red-500 text-white py-2 px-4 rounded ms-3">Clear Cart</button>
+</section>

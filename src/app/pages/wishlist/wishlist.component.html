@@ -1,0 +1,20 @@
+<section class="bg-gray-50 p-4">
+    <h1 class="text-3xl">My Wishlist:</h1>
+    @for (prod of wishData; track prod.id) {
+        <div class="grid md:grid-cols-[10%_minmax(0,1fr)] gap-5 mt-3 border-b">
+            <div class="left">
+                <img [src]="prod.imageCover" [alt]="prod.title">
+            </div>
+            <div class="right flex justify-between items-center">
+                <div class="start">
+                    <h3> {{prod.title}} </h3>
+                    <h4 class="text-green-500">Price: {{prod.price | currency:'GBP'}} </h4>
+                    <button (click)="removeWish(prod.id)"><i class="fas fa-trash-can text-red-500"></i> Remove</button>
+                </div>
+                <div class="end flex items-center gap-2">
+                    <button class="main-btn">Add To Cart</button>
+                </div>
+            </div>
+        </div>
+    }
+</section>
